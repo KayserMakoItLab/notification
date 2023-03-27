@@ -1,118 +1,17 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>CSV File Upload</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
-
-</head>
-<style>
- .notification {
-  position: fixed;
-  top: 0;
-  right: 0;
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  animation: fadeOut 2s ease-in-out;
-}
-
-.notification:hover {
-  animation-play-state: paused;
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-
-</style>
-
-<body>
-    <div id="notifications"></div>
-
-    <button id="success-button">SUCCESS</button>
-    <button id="error-button">ERROR</button>
-    <button id="info-button">INFO</button>
-    <button id="warning-button">WARNING</button>
-    
-
-</body>
-<script>
-  function useNotifications() {
-  const notificationContainer = document.getElementById('notifications');
-  const notifications = [];
-  const timeouts = [];
-
-  
-
-  function showNotification(type, message) {
-    const notification = document.createElement('div');
-    notification.classList.add('notification');
-    notification.classList.add(type.toLowerCase());
-    notification.textContent = message;
-
-    notificationContainer.appendChild(notification);
-    notifications.push(notification);
-
-    const timeoutId = setTimeout(() => {
-      removeNotification(notification);
-    }, 2000);
-
-    notification.addEventListener('mouseenter', () => {
-      clearTimeout(timeoutId);
-    });
-
-    notification.addEventListener('mouseleave', () => {
-      const timeoutId = setTimeout(() => {
-        removeNotification(notification);
-      }, 2000);
-      timeouts.push(timeoutId);
-    });
-  }
-
-  function removeNotification(notification) {
-    const index = notifications.indexOf(notification);
-    if (index > -1) {
-      notifications.splice(index, 1);
-      notification.remove();
-    }
-  }
-
-  return { showNotification };
-}
-
-const { showNotification } = useNotifications();
-
-
-document.getElementById('success-button').addEventListener('click', () => {
-  showNotification('SUCCESS', 'Success message');
-});
-
-document.getElementById('error-button').addEventListener('click', () => {
-  showNotification('ERROR', 'Error message');
-});
-
-document.getElementById('info-button').addEventListener('click', () => {
-  showNotification('INFO', 'Info message');
-});
-
-document.getElementById('warning-button').addEventListener('click', () => {
-  showNotification('WARNING', 'Warning message');
-});
-
-
-</script>
-
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+      <div id="notifications"></div>
+      <div class="buttons">
+        <button class="btn" value="success" style="background-color: rgb(23, 160, 96);" id="success-button">SUCCESS</button>
+        <button class="btn" style="background-color: rgb(235, 84, 84);" id="error-button">ERROR</button>
+        <button class="btn" style="background-color: rgb(87, 87, 254);" id="info-button">INFO</button>
+        <button class="btn" style="background-color: rgb(214, 214, 107);" id="warning-button">WARNING</button>
+      </div>
+    </body>
+    <script src="scripts.js">
+    </script>
 </html>
